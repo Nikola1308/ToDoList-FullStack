@@ -129,8 +129,8 @@ app.patch('/todos/taskdeletedtotaskdone/:id',async(req,res)=>{
         res.status(400).send()
     }
 })
-//Endpoint for deleting from ToDoTask
-app.delete('/todos/deletetodotask/:id',async(req,res)=>{
+//Endpoint for deleting from Tasks by Id
+app.delete('/todos/:id',async(req,res)=>{
      const _id = req.params.id
      try{
         const task = await ToDoList.findByIdAndDelete(_id)
@@ -142,20 +142,6 @@ app.delete('/todos/deletetodotask/:id',async(req,res)=>{
          res.status(400).send()
      }
 })
-//Endpoint for deleting from TaskDeleted
-app.delete('/todos/deletetaskdeleted/:id',async(req,res)=>{
-    const _id = req.params.id
-    try{
-        const task = await ToDoList.findByIdAndDelete(_id)
-        if(!task){
-            return res.status(404).send()
-        }
-        res.send(task)
-    }catch(e){
-        res.status(400).send()
-    }
-})
-
 
 
 app.listen(port,()=>{

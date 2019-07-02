@@ -78,7 +78,7 @@ app.get('/todos/tasks/:id',async(req,res)=>{
     }
 })
 //Endpoint for updating TypeOfCard-from ToDoTask to DoneTask
-app.patch('/todos/tasks/:id',async(req,res)=>{
+app.patch('/todos/taskstodotasktodonetask/:id',async(req,res)=>{
     const _id = req.params.id
     try{
         const task = await ToDoList.findByIdAndUpdate(_id,{typeOfCard:'TaskDone'},{new:true,runValidators:true})
@@ -129,9 +129,32 @@ app.patch('/todos/taskdeletedtotaskdone/:id',async(req,res)=>{
         res.status(400).send()
     }
 })
-
 //Endpoint for deleting from ToDoTask
+app.delete('/todos/deletetodotask/:id',async(req,res)=>{
+     const _id = req.params.id
+     try{
+        const task = await ToDoList.findByIdAndDelete(_id)
+        if(!task){
+            return res.status(404).send()
+        }
+        res.send(task)
+     }catch(e){
+         res.status(400).send()
+     }
+})
 //Endpoint for deleting from TaskDeleted
+app.delete('/todos/deletetaskdeleted/:id',async(req,res)=>{
+    const _id = req.params.id
+    try{
+        const task = await ToDoList.findByIdAndDelete(_id)
+        if(!task){
+            return res.status(404).send()
+        }
+        res.send(task)
+    }catch(e){
+        res.status(400).send()
+    }
+})
 
 
 

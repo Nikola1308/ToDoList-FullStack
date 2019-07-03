@@ -73,8 +73,8 @@ router.get('/todos/tasks/:id',async(req,res)=>{
         res.status(500).send()
     }
 })
-//Endpoint for updating TypeOfCard-from ToDoTask to DoneTask
-router.patch('/todos/taskstodotasktodonetask/:id',async(req,res)=>{
+//Endpoint for updating TypeOfCard to TaskDone
+router.patch('/todos/tocdone/:id',async(req,res)=>{
     const _id = req.params.id
     try{
         const task = await ToDoList.findByIdAndUpdate(_id,{typeOfCard:'TaskDone'},{new:true,runValidators:true})
@@ -86,8 +86,8 @@ router.patch('/todos/taskstodotasktodonetask/:id',async(req,res)=>{
         res.status(400).send(e)
     }
 })
-//Endpoint for updating TypeOfCard-from DoneTask to TaskDeleted
-router.patch('/todos/tasksdonetotaskdelete/:id',async(req,res)=>{
+//Endpoint for updating TypeOfCard to TaskDeleted
+router.patch('/todos/tocdel/:id',async(req,res)=>{
     const _id = req.params.id
     try{
         const task = await ToDoList.findByIdAndUpdate(_id,{typeOfCard:'TaskDeleted'},{new:true,runValidators:true})
@@ -99,8 +99,8 @@ router.patch('/todos/tasksdonetotaskdelete/:id',async(req,res)=>{
         res.status(400).send()
     }
 })
-//Endpoint for updating TypeOfCard-from DoneTask to ToDoTask
-router.patch('/todos/taskdonetotask/:id',async(req,res)=>{
+//Endpoint for updating TypeOfCard to ToDoTask
+router.patch('/todos/toctodo/:id',async(req,res)=>{
     const _id = req.params.id
     try{
         const task = await ToDoList.findByIdAndUpdate(_id,{typeOfCard:'TaskToDo'},{new:true,runValidators:true})
@@ -112,19 +112,7 @@ router.patch('/todos/taskdonetotask/:id',async(req,res)=>{
         res.status(400).send()
     }
 })
-//Endpoint for updating TypeOfCard-from TaskDeleted to DoneTask
-router.patch('/todos/taskdeletedtotaskdone/:id',async(req,res)=>{
-    const _id = req.params.id
-    try{
-        const task = await ToDoList.findByIdAndUpdate(_id,{typeOfCard:'TaskDone'},{new:true,runValidators:true})
-        if(!task){
-            return res.status(404).send()
-        }
-        res.send(task)
-    }catch(e){
-        res.status(400).send()
-    }
-})
+
 //Endpoint for deleting from Tasks by Id
 router.delete('/todos/:id',async(req,res)=>{
      const _id = req.params.id

@@ -1,6 +1,8 @@
 const express = require('express')
 const ToDoList = require('../models/ToDoList')
 const router = new express.Router()
+//const cors = require('cors')
+const app = express()
 
 
 //Endpoint post for posting Tasks
@@ -8,6 +10,8 @@ router.post('/todos', async (req,res)=>{
     const todo = new ToDoList(req.body)
     try{
         await todo.save()
+        //res.setHeader('Access-Control-Allow-Origin', '*');
+       // res.setHeader('Content-Type', 'application/json')
         res.status(201).send(todo)
     }catch(e){
         res.status(400).send(e)
@@ -18,6 +22,7 @@ router.post('/todos', async (req,res)=>{
 router.get('/todos',async(req,res)=>{
     try{
         const tasks = await ToDoList.find({})
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(tasks)
     }catch(e){
         res.status(500).send(e)
@@ -31,6 +36,7 @@ router.get('/todos/tasktodo',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(500).send(e)
@@ -43,6 +49,7 @@ router.get('/todos/taskdone',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(500).send(e)
@@ -55,6 +62,7 @@ router.get('/todos/taskdeleted', async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(500).send(e)
@@ -68,6 +76,7 @@ router.get('/todos/tasks/:id',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(500).send()
@@ -81,6 +90,7 @@ router.patch('/todos/tocdone/:id',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(400).send(e)
@@ -94,6 +104,7 @@ router.patch('/todos/tocdel/:id',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(400).send()
@@ -107,6 +118,7 @@ router.patch('/todos/toctodo/:id',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
     }catch(e){
         res.status(400).send()
@@ -121,10 +133,13 @@ router.delete('/todos/:id',async(req,res)=>{
         if(!task){
             return res.status(404).send()
         }
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(task)
      }catch(e){
          res.status(400).send()
      }
 })
+
+//app.use(cors())
 
 module.exports = router

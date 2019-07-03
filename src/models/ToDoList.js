@@ -6,7 +6,8 @@ const TodoList = mongoose.model('TodoList',{
     },
     typeOfCard:{
         type:String,
-        enum:['TaskToDo','TaskDone','TaskDeleted']
+        enum:['TaskToDo','TaskDone','TaskDeleted'],
+        default:'TaskToDo'
     }
 })
 

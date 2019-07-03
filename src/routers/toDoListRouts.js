@@ -10,7 +10,7 @@ router.post('/todos', async (req,res)=>{
     const todo = new ToDoList(req.body)
     try{
         await todo.save()
-        //res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Origin', '*');
        // res.setHeader('Content-Type', 'application/json')
         res.status(201).send(todo)
     }catch(e){

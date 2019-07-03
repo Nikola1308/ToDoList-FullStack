@@ -11,27 +11,42 @@ const getTodos =()=>{
     })
 }
 getTodos()
-/*
+
 document.getElementById('inputText').addEventListener('keypress',(e)=>{
     if (e.key === 'Enter') {
         let input = document.getElementById('inputText')
         let inputValue = input.value
-        console.log({value:inputValue})
+        //console.log({value:inputValue})
+        
+        fetch('http://localhost:3001/todos',{
+            method:'POST',
+            body:JSON.stringify({value:input.value})
+        }).then((response)=>{
+            return response.json()
+        }).then((data)=>{
+            console.log(data)
+        })
+        /*
+        fetch(url,{
+            method:'POST',
+            body:JSON.stringify(inputValue),
+           
+        }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        */
+        /*
+        postData('http://localhost:3001/todos',{value:inputValue}).then(data=>console.log(JSON.stringify(data)))
+        .catch(error =>console.log(error))
        
-         const postTodos= ()=>{  
-         fetch(url,{
-            method:"POST",
-            mode: "no-cors",
-            body:JSON.stringify({value:inputValue}),
-            headers: { "Content-Type": "application/json; charset=utf-8" }}).then((res)=>{
-                console.log(res)
-                return
-            }).then((res)=>{
-                return(JSON.stringify(res))
-            })
+        
+         function postData(url = 'http://localhost:3001/todos',value = {inputValue}){  
+          fetch(url, {
+                 method: "POST",
+                 body: JSON.stringify({value})
+             }).then((res)=>res.json())
         } 
-        postTodos()
-       }
-}) */
+        postData() */
+       } 
+})  
 
 

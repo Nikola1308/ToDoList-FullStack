@@ -16,36 +16,19 @@ document.getElementById('inputText').addEventListener('keypress',(e)=>{
     if (e.key === 'Enter') {
         let input = document.getElementById('inputText')
         let inputValue = input.value
-        //console.log({value:inputValue})
         
         fetch('http://localhost:3001/todos',{
             method:'POST',
-            body:JSON.stringify({value:input.value})
+            body:JSON.stringify({value:inputValue}),
+            headers: {
+                "Content-type": 'application/json',
+                'Accept': "application/json"
+            }
         }).then((response)=>{
             return response.json()
         }).then((data)=>{
             console.log(data)
         })
-        /*
-        fetch(url,{
-            method:'POST',
-            body:JSON.stringify(inputValue),
-           
-        }).then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        */
-        /*
-        postData('http://localhost:3001/todos',{value:inputValue}).then(data=>console.log(JSON.stringify(data)))
-        .catch(error =>console.log(error))
-       
-        
-         function postData(url = 'http://localhost:3001/todos',value = {inputValue}){  
-          fetch(url, {
-                 method: "POST",
-                 body: JSON.stringify({value})
-             }).then((res)=>res.json())
-        } 
-        postData() */
        } 
 })  
 

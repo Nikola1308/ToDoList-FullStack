@@ -7,9 +7,10 @@ const toDoList = require('./routers/toDoListRouts')
 const app = express()
 
 const port = process.env.PORT || 3001
-
+app.use((req,res,next)=>{
+    next();
+})
 app.use(express.json())
-app.use(toDoList)
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,'Autorization");
@@ -19,6 +20,8 @@ app.use(function(req, res, next) {
     }
     next();
   });
+
+app.use(toDoList)
 
 app.listen(port,()=>{
     console.log('Serve is up on port: ' + port)

@@ -8,11 +8,12 @@ const app = express()
 //Endpoint post for posting Tasks
 router.post('/todos', async (req,res)=>{
     const todo = new ToDoList({ 
-        value : req.body.value
+        value : req.body.value,
+       // timeToDoTasks : req.body
     })
     try{
         await todo.save()
-        res.setHeader('Access-Control-Allow-Origin', '*');
+       // res.setHeader('Access-Control-Allow-Origin', '*');
         res.status(201).send(todo)
     }catch(e){
         res.status(400).send(e)

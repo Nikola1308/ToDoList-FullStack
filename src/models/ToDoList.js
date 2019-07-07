@@ -1,25 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-const TimeToDoTasks = new Schema({
-    1:{        
-        type:String,
-        default:'Today'
-    },
-    2:{
-        type:String,
-        default:'Tomorrow'
-    },
-    3:{
-        type:String,
-        default:'In Seven Days'
-    },
-    4:{
-        type:String,
-        default:'In One Month'
+const AddDescriptionsForTasks = new Schema({
+    descriptionValue:{
+        type:String
     }
 })
-module.exports = mongoose.model('TimeToDoTasks',TimeToDoTasks)
+module.exports.AddDescriptionsForTasks = mongoose.model('AddDescriptionsForTasks',AddDescriptionsForTasks)
 
 const ToDoList = new Schema({
     value:{
@@ -30,12 +17,13 @@ const ToDoList = new Schema({
         enum:['TaskToDo','TaskDone','TaskDeleted'],
         default:'TaskToDo'
     },
-    timeToDoTasks:[
+    descriptionsOfCards:[
         //refernca  type na number
-        {type:Schema.Types.ObjectId,ref:'TimeToDoTasks'}
-    ]
+        //{type:Number,ref:'TimeToDoTasks'},
+        {type: Schema.Types.ObjectId, ref:'AddDescriptionsForTasks'}
+    ] 
 })
-module.exports = mongoose.model('ToDoList',ToDoList)
+module.exports.ToDoList = mongoose.model('ToDoList',ToDoList)
 
 
 

@@ -143,5 +143,63 @@ document.getElementById('delete').addEventListener('click',()=>{
 })
 
 
+//==========DESCRIPTION POSTS========//
+
+//Post request for Description 
+document.getElementById('description').addEventListener('keypress',(e)=>{
+    if (e.key === 'Enter') {
+        let input = document.getElementById('description')
+        let inputValue = input.value
+        
+        fetch('http://localhost:3001/todos/desctiption',{
+            method:'POST',
+            body:JSON.stringify({descriptionValue:inputValue}),
+            headers: {
+                "Content-type": 'application/json',
+                'Accept': "application/json"
+            }
+        }).then((response)=>{
+            return response.json()
+        }).then((data)=>{
+            console.log(data)
+        })
+       } 
+})  
+
+//Post Request for Reading All Descriptions
+document.getElementById('description-read').addEventListener('click',()=>{
+    const getDescriptions =()=>{
+        fetch('http://localhost:3001/todos/description',{method:"get"}).then((res)=>{
+            return res.json()
+        }).then((data)=>{
+            console.log('DESCRIPTIONS',data)
+        })
+    }
+    getDescriptions()
+
+})
+//Delete Request for Delete By ID
+document.getElementById('description-delete').addEventListener('click',()=>{
+    const deleteTask = ()=>{
+        fetch('http://localhost:3001/todos/desctiption/5d1f3bc82b26d410c4d36935',{
+            method:'DELETE',
+            headers: {
+                "Content-type": 'application/json',
+                'Accept': "application/json"
+            },
+            body:JSON.stringify()
+        }).then((response)=>{
+            return response.json()
+        }).then((data)=>{
+            console.log('DELETED DESCRIPTION',data)
+        })
+    }
+    deleteTask()    
+})
+
+
+
+
+
 
 

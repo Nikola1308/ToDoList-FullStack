@@ -145,15 +145,15 @@ document.getElementById('delete').addEventListener('click',()=>{
 
 //==========DESCRIPTION POSTS========//
 
-//Post request for Description 
+//Patch request for Description 
 document.getElementById('description').addEventListener('keypress',(e)=>{
     if (e.key === 'Enter') {
         let input = document.getElementById('description')
         let inputValue = input.value
         
-        fetch('http://localhost:3001/todos/desctiption',{
-            method:'POST',
-            body:JSON.stringify({descriptionValue:inputValue}),
+        fetch('http://localhost:3001/todos/tocdone/descirption/5d1f53d7819bae394c6f0977',{
+            method:'PATCH',
+            body:JSON.stringify({descriptionValue:inputValue},{descriptionsOfCards:inputValue}),
             headers: {
                 "Content-type": 'application/json',
                 'Accept': "application/json"
@@ -181,7 +181,7 @@ document.getElementById('description-read').addEventListener('click',()=>{
 //Delete Request for Delete By ID
 document.getElementById('description-delete').addEventListener('click',()=>{
     const deleteTask = ()=>{
-        fetch('http://localhost:3001/todos/desctiption/5d1f3bc82b26d410c4d36935',{
+        fetch('http://localhost:3001/todos/desctiption/5d22ef53fe9fe32e4867dbeb',{
             method:'DELETE',
             headers: {
                 "Content-type": 'application/json',

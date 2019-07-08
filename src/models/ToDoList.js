@@ -25,33 +25,3 @@ const ToDoList = new Schema({
 })
 module.exports.ToDoList = mongoose.model('ToDoList',ToDoList)
 
-
-
-/*
-const TodoList = mongoose.model('TodoList',{
-    value:{
-        type:String
-    },
-    typeOfCard:{
-        type:String,
-        enum:['TaskToDo','TaskDone','TaskDeleted'],
-        default:'TaskToDo'
-    }
-})
-const TimeToDoTasks = mongoose.model('TimeToDoTasks',{
-    today:{
-        type:String
-    },
-    tomorow:{
-        type:String
-    },
-    sevendays:{
-        type:String
-    },
-    onemonth:{
-        type:String
-    }
-})
-
-
-module.exports = ('ToDoList',TodoList) */

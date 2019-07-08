@@ -194,13 +194,13 @@ router.delete('/todos/desctiption/:id',async(req,res)=>{
 
 
 //TESTING ENDPOINT 
-
+//ENDPOINT FOR PATCH ONE DESCRIPTION
 router.patch('/todos/tocdone/descirption/:id',async(req,res)=>{
     const _id = req.params.id
- 
+   
     const newDescription = new toDoAllModles.AddDescriptionsForTasks({
         descriptionValue: req.body.descriptionValue
-    })
+    })   
     try{
         newDescription.save()
 
@@ -217,5 +217,33 @@ router.patch('/todos/tocdone/descirption/:id',async(req,res)=>{
     }
     
 })
+//ENDPOINT FOR DELETING ONE DESCRIPTION
+ 
+router.patch('/todos/desctiptiondelete/:id',async(req,res)=>{
+    const _id = req.params.id
+    
+    const id = req.body.newDescription
+   // console.log(id)
+    
+    
+
+    try{
+        const delteId = await toDoAllModles.AddDescriptionsForTasks.findByIdAndDelete(id)
+        console.log(id)
+        console.log(_id)
+        const description = await toDoAllModles.ToDoList.findByIdAndUpdate(_id,
+            {$pull:{descriptionsOfCards:id}},{new:true,runValidators:true})
+        if(!description){
+            return res.status(404).send()
+        }
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(description)
+    }
+    catch(e){
+       res.status(400).send()
+    }
+}) 
+
+
 
 module.exports = router

@@ -4,7 +4,7 @@ const url = new URL('http://localhost:3001/todos')
 
 // GET Request for all Tasks
 const getTodos =()=>{
-    fetch(url,{method:"get"}).then((res)=>{
+    fetch('http://localhost:3001/todos',{method:"get"}).then((res)=>{
         return res.json()
     }).then((data)=>{
         console.log(data)

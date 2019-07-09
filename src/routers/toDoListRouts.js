@@ -5,18 +5,11 @@ const router = new express.Router()
 
 //Endpoint post for posting Tasks
 router.post('/todos', async (req,res)=>{
-   // const saveDescription= new toDoAllModles.AddDescriptionsForTasks({
-   //     descriptionValue: req.body.descriptionValue
-   // }) 
     const todo = new toDoAllModles.ToDoList({ 
         value : req.body.value
-       // timeToDoTasks:req.body.timeToDoTasks
+      
     })
-    
-    //console.log(req.body)
-    
     try{
-       
         await todo.save()
         res.status(201).send(todo)
     }catch(e){
@@ -147,50 +140,6 @@ router.delete('/todos/:id',async(req,res)=>{
      }
 })
 
-//=================DESCRIPTIONS END POINTS===============//
-
-//Endpoint for POST request for AddDescriptionForTask
-router.post('/todos/desctiption',async(req,res)=>{
-    const desctiption = new toDoAllModles.AddDescriptionsForTasks({
-        descriptionValue:req.body.descriptionValue
-    })
-    try{
-        await desctiption.save()
-        res.status(201).send(desctiption)
-    }
-    catch(e){
-        res.status(400).send(e)
-    }
-})
-
-//Endpoint for Reading all Descriptions
-router.get('/todos/description',async(req,res)=>{
-    try{
-
-    const description = await toDoAllModles.AddDescriptionsForTasks.find({})
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.send(description)
-    }
-    catch(e){
-    res.status(500).send(e)
-    }
-})
-
-//Endpoint for DELETING request for Description
-router.delete('/todos/desctiption/:id',async(req,res)=>{
-    const _id = req.params.id
-    try{
-        const description = await toDoAllModles.AddDescriptionsForTasks.findByIdAndDelete(_id)
-        if(!description){
-            return res.status(404).send()
-        }
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send(description)
-    }
-    catch(e){
-       res.status(400).send()
-    }
-})
 
 
 //TESTING ENDPOINT 
@@ -221,16 +170,9 @@ router.patch('/todos/tocdone/descirption/:id',async(req,res)=>{
  
 router.patch('/todos/desctiptiondelete/:id',async(req,res)=>{
     const _id = req.params.id
-    
     const id = req.body.newDescription
-   // console.log(id)
-    
-    
-
-    try{
+       try{
         const delteId = await toDoAllModles.AddDescriptionsForTasks.findByIdAndDelete(id)
-        console.log(id)
-        console.log(_id)
         const description = await toDoAllModles.ToDoList.findByIdAndUpdate(_id,
             {$pull:{descriptionsOfCards:id}},{new:true,runValidators:true})
         if(!description){

@@ -2,6 +2,7 @@ const express = require('express')
 require('./mongodb/mongoose')
 //const ToDoList = require('./models/ToDoList')
 const toDoList = require('./routers/toDoListRouts')
+const descriptionRouts = require('./routers/descriptionRouts')
 
 
 const app = express()
@@ -21,7 +22,8 @@ app.use(function(req, res, next) {
     next();
   });
 
-app.use(toDoList)
+app.use(descriptionRouts,toDoList)
+
 
 app.listen(port,()=>{
     console.log('Serve is up on port: ' + port)
